@@ -1,66 +1,299 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <% include ../partials/header.ejs %>
-</head>
+<title>M K PORTFOLIO</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="stylesheets/index.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
+    body, html {
+        height: 100%;
+        color: #777;
+        line-height: 1.8;
+    }
 
+    /* Create a Parallax Effect */
+    .bgimg-1, .bgimg-2, .bgimg-3 {
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    /* First image (Logo. Full height) */
+    .bgimg-1 {
+        background-image: url('https://s3.amazonaws.com/mattkim-portfolio/pexels-photo-38892.jpeg');
+        min-height: 100%;
+    }
+
+    /* Second image (Portfolio) */
+    .bgimg-2 {
+        background-image: url("https://s3.amazonaws.com/mattkim-portfolio/pexels-photo-302899.jpeg");
+        min-height: 400px;
+    }
+
+    /* Third image (Contact) */
+    .bgimg-3 {
+        background-image: url("https://s3.amazonaws.com/mattkim-portfolio/pexels-photo-golden-gate-bridge.jpg");
+        min-height: 400px;
+    }
+
+    .w3-wide {letter-spacing: 10px;}
+    .w3-hover-opacity {cursor: pointer;}
+
+    /* Turn off parallax scrolling for tablets and phones */
+    @media only screen and (max-device-width: 1024px) {
+        .bgimg-1, .bgimg-2, .bgimg-3 {
+            background-attachment: scroll;
+        }
+    }
+</style>
 <body>
 
-  <% include ../partials/nav.ejs %>
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+    <ul class="w3-navbar" id="myNavbar">
+        <li class="w3-hide-medium w3-hide-large w3-opennav w3-right">
+            <a class="w3-hover-airbnb" href="javascript:void(0);" onclick="toggleFunction('navDemo')" title="Toggle Navigation Menu">
+                <i class="fa fa-bars"></i>
+            </a>
+        </li>
+        <li class="w3-left-align"><a class="w3-hover-airbnb" onclick="scrollToElementId('home', 5)">HOME</a></li>
+        <li class="w3-hide-small"><a class="w3-hover-airbnb" onclick="scrollToElementId('about', 5)"><i class="fa fa-user"></i> ABOUT</a></li>
+        <li class="w3-hide-small"><a class="w3-hover-airbnb" onclick="scrollToElementId('blog', 5)"><i class="fa fa-th"></i> BLOG</a></li>
+        <li class="w3-hide-small"><a class="w3-hover-airbnb" onclick="scrollToElementId('contact', 5)"><i class="fa fa-envelope"></i> CONTACT</a></li>
+    </ul>
 
-<div class="jumbotron text-center">
-  <div class="container">
-    <a href="/" class="lang-logo">
-      <img src="/lang-logo.png">
-    </a>
-    <h1>Getting Started with Node on Heroku</h1>
-    <p>This is a sample Node application deployed to Heroku. It's a reasonably simple app - but a good foundation for understanding how to get the most out of the Heroku platform.</p>
-    <a type="button" class="btn btn-lg btn-default" href="https://devcenter.heroku.com/articles/getting-started-with-nodejs"><span class="glyphicon glyphicon-flash"></span> Getting Started with Node</a>
-    <a type="button" class="btn btn-lg btn-primary" href="https://github.com/heroku/node-js-getting-started"><span class="glyphicon glyphicon-download"></span> Source on GitHub</a>
-  </div>
-</div>
-<div class="container">
-  <div class="alert alert-info text-center" role="alert">
-    To deploy your own copy, and learn the fundamentals of the Heroku platform, head over to the <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs" class="alert-link">Getting Started with Node on Heroku</a> tutorial.
-  </div>
-  <hr>
-  <div class="row">
-    <div class="col-md-6">
-      <h3><span class="glyphicon glyphicon-info-sign"></span> How this sample app works</h3>
-      <ul>
-        <li>This app was deployed to Heroku, either using Git or by using <a href="https://github.com/heroku/node-js-getting-started">Heroku Button</a> on the repository.</li>
-
-        <li>When Heroku received the source code, it fetched all the dependencies in the <a href="https://github.com/heroku/node-js-getting-started/blob/master/package.json">package.json</a>, creating a deployable slug.</li>
-        <li>The platform then spins up a dyno, a lightweight container that provides an isolated environment in which the slug can be mounted and executed.</li>
-        <li>You can scale your app, manage it, and deploy over <a href="https://addons.heroku.com/">150 add-on services</a>, from the Dashboard or CLI.</li>
-      </ul>
-    </div>
-    <div class="col-md-6">
-      <h3><span class="glyphicon glyphicon-link"></span> Next Steps</h3>
-      <ul>
-        <li>If you are following the <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs">Getting Started</a> guide, then please head back to the tutorial and follow the next steps!</li>
-        <li>If you deployed this app by deploying the Heroku Button, then in a command line shell, run:</li>
-        <ul>
-          <li><code>git clone https://github.com/heroku/node-js-getting-started.git</code> - this will create a local copy of the source code for the app</li>
-          <li><code>cd node-js-getting-started</code> - change directory into the local source code repository</li>
-          <li><code>heroku git:remote -a &lt;your-app-name></code> - associate the Heroku app with the repository</li>
-          <li>You'll now be set up to run the app locally, or <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs#push-local-changes">deploy changes</a> to Heroku</li>
+    <!-- Navbar on small screens -->
+    <div id="navDemo" class="w3-hide w3-hide-large w3-hide-medium w3-border" onclick="toggleFunction('navDemo')">
+        <ul class="w3-navbar w3-left-align w3-white">
+            <li><a class="w3-hover-airbnb" onclick="scrollToElementId('about', 5)">ABOUT</a></li>
+            <li><a class="w3-hover-airbnb" onclick="scrollToElementId('blog', 5)">BLOG</a></li>
+            <li><a class="w3-hover-airbnb" onclick="scrollToElementId('contact', 5)">CONTACT</a></li>
         </ul>
-      </ul>
-      <h3><span class="glyphicon glyphicon-link"></span> Helpful Links</h3>
-      <ul>
-        <li><a href="https://www.heroku.com/home">Heroku</a></li>
-        <li><a href="https://devcenter.heroku.com/">Heroku Dev Center</a></li>
-        <li><a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs">Getting Started with Node on Heroku</a></li>
-        <li><a href="https://devcenter.heroku.com/articles/deploying-nodejs">Deploying Node Apps on Heroku</a></li>
-      </ul>
     </div>
-  </div> <!-- row -->
-   <div class="alert alert-info text-center" role="alert">
-    Please do work through the Getting Started guide, even if you do know how to build such an application.  The guide covers the basics of working with Heroku, and will familiarize you with all the concepts you need in order to build and deploy your own apps.
-  </div>
 </div>
 
+<!-- First Parallax Image with Logo Text -->
+<div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
+    <div class="w3-display-middle" style="white-space:nowrap;">
+        <span class="w3-center w3-padding-xlarge mk-teal-blue-gradient w3-xlarge w3-wide w3-animate-opacity">M <span class="w3-hide-small">K</span> PORTFOLIO</span>
+    </div>
+</div>
+
+<!-- Container (About Section) -->
+<div class="w3-content w3-container w3-padding-64" id="about">
+    <h3 class="w3-center">ABOUT ME</h3>
+    <p>Welcome to my portfolio, where you can find my blog and current projects I am working on.  By trade I am a software developer, and had my education at University of California, San Diego where I received a degree in Bachelors of Science, Computer Science.  I have passion for world-class engineering and design coupled with a belief in hard work and high quality.</p>
+    <div class="w3-row">
+        <div class="w3-col m6 w3-center w3-padding-large">
+            <p class="w3-xlarge"><b><i class="fa fa-user w3-margin-right"></i>Matt Kim</b></p><br>
+            <img src="https://s3.amazonaws.com/mattkim-portfolio/mattkim_fb_profile.jpg" class="w3-round w3-image" alt="Photo of Me" width="500" height="333">
+        </div>
+
+        <!-- Hide this text on small devices -->
+        <div class="w3-col m6 w3-padding-large">
+            <p class="w3-large w3-center w3-padding-16">Experience:</p>
+            <p class="w3-medium"><i class="fa fa-car"></i>&nbsp;&nbsp;Uber</p>
+            <div class="w3-progress-container">
+                <div class="w3-progressbar" style="width:25%"></div>
+            </div>
+            <p class="w3-medium"><i class="fa fa-amazon"></i>&nbsp;&nbsp;Amazon</p>
+            <div class="w3-progress-container">
+                <div class="w3-progressbar" style="width:100%"></div>
+            </div>
+            <p class="w3-medium"><i class="fa fa-university"></i>&nbsp;&nbsp;UCSD, Computer Science</p>
+            <div class="w3-progress-container">
+                <div class="w3-progressbar" style="width:100%"></div>
+            </div>
+            <p class="w3-padding-16">
+                <a href="https://www.linkedin.com/in/matthew-kim-7b177918" target="_blank">
+                    https://www.linkedin.com/in/matthew-kim-7b177918
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Second Parallax Image with BLOG Text -->
+<div class="bgimg-2 w3-display-container w3-opacity-min">
+    <div class="w3-display-middle">
+        <span class="w3-xxlarge w3-text-light-grey w3-wide">BLOG</span>
+    </div>
+</div>
+
+<!-- Container (BLOG Section) -->
+<div class="w3-content w3-container w3-padding-64" id="blog">
+    <img class="mk-img-center mk-img-md" src="http://iosicongallery.com/img/512/medium-2015.png" />
+    <p class="w3-large w3-center w3-padding-16">
+        <a target="_blank" href="https://medium.com/@matthkim/if-you-code-you-should-read-14370e6b275c#.oa5n4bhdw">If you code, you should read</a>
+    </p>
+    <p>
+        Coming out of college, I was probably the least well read person I knew. I spent most of my time watching videos rather than reading. At some level I was even proud of this, thinking that video was just a better form of artistic expression.
+        <br/><br/>
+        But once I started working at Amazon, I met a much more diverse set of smart people, a lot of whom read all the time. Specifically, my first mentor was someone who would rather spend their afternoons reading Game of Thrones as opposed to watching it. I might’ve actually thought this was lame on first impression, but I started to notice how their reading instincts made them a strong performing software engineer. When I had a question about how our system performed, they would crack open our internal Code Browser and just read through hundreds of lines of code extremely quickly. I realized it was because they had already spent the time to read through this code beforehand that they could do this. It was like reading through a book you’ve already read...
+    </p>
+    <div class="w3-center">
+        <a target="_blank" href="https://medium.com/@matthkim/if-you-code-you-should-read-14370e6b275c#.oa5n4bhdw">
+            <button class="w3-btn w3-round-jumbo w3-hover-airbnb w3-light-grey w3-padding-xlarge" style="margin-top:32px">READ MORE</button>
+        </a>
+    </div>
+</div>
+
+<!-- Modal for full size images on click-->
+<div id="modal01" class="w3-modal w3-black" onclick="this.style.display='none'">
+    <span class="w3-closebtn w3-text-white w3-opacity w3-hover-opacity-off w3-xxlarge w3-container w3-display-topright" title="Close Modal Image"><i class="fa fa-remove"></i></span>
+    <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+        <img id="img01" class="w3-image">
+        <p id="caption" class="w3-opacity w3-large"></p>
+    </div>
+</div>
+
+<!-- Third Parallax Image with Portfolio Text -->
+<div class="bgimg-3 w3-display-container w3-opacity-min">
+    <div class="w3-display-middle">
+        <span class="w3-xxlarge w3-text-light-grey w3-wide">CONTACT</span>
+    </div>
+</div>
+
+<!-- Container (Contact Section) -->
+<div class="w3-content w3-container w3-padding-64" id="contact">
+    <div class="w3-row w3-padding-32 w3-section">
+        <div class="w3-col m4 w3-container">
+            <!-- Add Google Maps -->
+            <div id="googleMap" class="w3-round-large w3-greyscale" style="width:100%;height:400px;"></div>
+        </div>
+        <div class="w3-col m8 w3-container w3-section">
+            <div class="w3-large w3-margin-bottom">
+                <i class="fa fa-map-marker fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> San Francisco<br>
+                <i class="fa fa-envelope fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> matthkim@gmail.com<br>
+            </div>
+            <p>Leave a message:</p>
+            <form action="mailto:matthkim@gmail.com" method="post" enctype="text/plain">
+                <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
+                    <div class="w3-half w3-padding-8">
+                        <input class="w3-input w3-border w3-round-medium" type="text" placeholder="Name" required name="Name">
+                    </div>
+                    <div class="w3-half w3-padding-8">
+                        <input class="w3-input w3-border w3-round-medium" type="text" placeholder="Email" required name="Email">
+                    </div>
+                </div>
+                <input class="w3-input w3-border w3-round-medium" type="text" placeholder="Message" required name="Message">
+
+                <button class="w3-btn w3-round-jumbo w3-hover-airbnb w3-light-grey w3-right w3-padding w3-section">
+                    SEND MESSAGE
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="w3-center mk-teal-blue-gradient w3-padding-64 w3-opacity w3-hover-opacity-off">
+    <a onclick="scrollToElementId('home', 5)">
+        <button class="w3-btn w3-round-jumbo w3-hover-airbnb w3-light-grey w3-padding">
+            <i class="fa fa-arrow-up w3-margin-right"></i> TOP
+        </button>
+    </a>
+    <p>&copy; Matt Kim</p>
+</footer>
+
+<!-- Add Google Maps -->
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script>
+  <!-- Google Map Location -->
+  var myCenter = new google.maps.LatLng(37.773972, -122.431297);
+
+  function initialize() {
+    var mapProp = {
+      center: myCenter,
+      zoom: 12,
+      scrollwheel: false,
+      draggable: false,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+    var marker = new google.maps.Marker({
+      position: myCenter,
+    });
+
+    marker.setMap(map);
+  }
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+
+  // Modal Image Gallery
+  function onClick(element) {
+    document.getElementById("img01").src = element.src;
+    document.getElementById("modal01").style.display = "block";
+    var captionText = document.getElementById("caption");
+    captionText.innerHTML = element.alt;
+  }
+
+  // Change style of navbar on scroll
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var navbar = document.getElementById("myNavbar");
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+      navbar.className = "w3-navbar" + " w3-card-2" + " w3-animate-top" + " w3-white";
+    } else {
+      navbar.className = navbar.className.replace(" w3-card-2 w3-animate-top w3-white", "");
+    }
+  }
+
+  // Used to toggle the menu on small screens when clicking on the menu button
+  function toggleFunction(elemId) {
+    var x = document.getElementById(elemId);
+    if (x.className.indexOf("w3-show") == -1) {
+      x.className += " w3-show";
+    } else {
+      x.className = x.className.replace(" w3-show", "");
+    }
+  }
+
+  // Used to scroll to element id with the given speed measured by update interval in ms.
+  function scrollToElementId(elemId, speed) {
+    var elem = document.getElementById(elemId);
+    // This is the true offset from the top of the window
+    var elemHeight = elem.offsetTop;
+    var initialY = window.scrollY;
+    var id = setInterval(frame, speed);
+    var limit = Math.max( document.body.scrollHeight, document.body.offsetHeight,
+      document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight );
+
+    function frame() {
+      if (elemHeight > initialY) {
+        // limit - innerHeight gives us the top of the page at the bottom of the scroll.
+        if(window.scrollY >= limit - window.innerHeight) {
+          clearInterval(id);
+        }
+
+        // Scroll down
+        if (window.scrollY >= elemHeight) {
+          clearInterval(id);
+        } else {
+          window.scrollTo(window.scrollX, window.scrollY + 10);
+        }
+      } else {
+        if(window.scrollY <= 0) {
+          clearInterval(id);
+        }
+
+        // Scroll up
+        if (window.scrollY <= elemHeight) {
+          clearInterval(id);
+        } else {
+          window.scrollTo(window.scrollX, window.scrollY - 10);
+        }
+      }
+    }
+  }
+
+</script>
 
 </body>
 </html>
